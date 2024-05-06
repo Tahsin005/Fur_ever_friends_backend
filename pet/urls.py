@@ -9,5 +9,5 @@ router.register('category', views.CategoryViewSet)
 router.register('review', views.ReviewViewSet)
 urlpatterns = [
     path('', include(router.urls)),
-    path('adopt/', transaction_views.PetAdoptApiView.as_view(), name='adopt'),
+    # path('adopt/', transaction_views.PetAdoptApiView.as_view(), name='adopt'),
 ]
