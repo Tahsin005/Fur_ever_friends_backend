@@ -2,8 +2,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from . models import UserAccount
-from . serializers import UserAccountSerializer, UserRegistrationSerializer, UserLoginSerializer
+from . serializers import UserAccountSerializer, UserRegistrationSerializer, UserLoginSerializer, UserProfileUpdateSerializer, PasswordChageSerializer,AllUserSerializer
 from rest_framework.views import APIView
+from rest_framework.generics import UpdateAPIView
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.authtoken.models import Token
@@ -86,3 +87,20 @@ class UserLogoutApiView(APIView):
         request.user.auth_token.delete()
         logout(request)
         return redirect('login')
+    
+class UserProfileUpdateApiView(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserProfileUpdateSerializer
+    
+class PasswordChangeApiView(APIView):
+    def post(self, request):
+        serializer = PasswordChageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Password changed successfully"})
+        return Response(serializer.errors)
+    
+
+class AllUserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = AllUserSerializer
