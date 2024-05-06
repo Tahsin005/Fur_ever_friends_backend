@@ -84,6 +84,11 @@ class PetAdoptSerializer(serializers.Serializer):
             user_account.balance -= adopting_cost
             user_account.save(update_fields=["balance"])
 
-            Transaction.objects.create(account=user_account, amount=adopting_cost, balance_after_transaction=user_account.balance, transaction_type="Pay",)
+            Transaction.objects.create(
+                account=user_account,
+                amount=adopting_cost,
+                balance_after_transaction=user_account.balance,
+                transaction_type="Pay",
+            )
 
         return pet
