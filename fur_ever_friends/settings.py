@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-mom=u+b__^ayls-uoy!8k@m#kpyj48*2zf@bpt9wxm24jjar(n
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['https://fur-ever-friends-backend.onrender.com/','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://fur-ever-friends-backend.onrender.com','https://*.127.0.0.1']
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 

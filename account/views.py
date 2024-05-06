@@ -46,7 +46,7 @@ class UserRegistrationSerializerViewSet(APIView):
             
             email.send() 
             
-            return Response("Check your email for confirmation")
+            return Response('Check your email for confirmation')
         return Response(serializer.errors)
 
 def activate(request, uid64, token):
@@ -97,7 +97,7 @@ class PasswordChangeApiView(APIView):
         serializer = PasswordChageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "Password changed successfully"})
+            return Response({'message': 'Password changed successfully'})
         return Response(serializer.errors)
     
 

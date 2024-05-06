@@ -9,7 +9,7 @@ class PetViewSet(viewsets.ModelViewSet):
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["categories__slug", "categories__name"]
+    filterset_fields = ['categories__slug', 'categories__name']
     
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -19,5 +19,5 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["pet__id"]
+    filterset_fields = ['pet__id']
     

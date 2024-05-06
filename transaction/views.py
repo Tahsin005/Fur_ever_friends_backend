@@ -22,5 +22,5 @@ class PetAdoptApiView(APIView):
         serializer = PetAdoptSerializer(data=request.data)
         if serializer.is_valid():
             adopted_pet = serializer.save()
-            return Response({"message": f"You have successfully adopted the pet: {adopted_pet.name}"})
+            return Response({'message' : 'You have successfully adopted the pet: {adopted_pet.name}'})
         return Response(serializer.errors)
