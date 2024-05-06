@@ -15,7 +15,7 @@ class Pet(models.Model):
     price = models.IntegerField()
     categories = models.ManyToManyField(Category, related_name='categories')
     added_by = models.ForeignKey(User, related_name="added_by", on_delete=models.CASCADE, blank=True, null=True)
-    adopted_by = models.ForeignKey(User, related_name="adopted_by" , on_delete=models.CASCADE, blank=True, null=True)
+    adopter = models.ForeignKey(User, related_name="adopted_by" , on_delete=models.CASCADE, blank=True, null=True)
     
     
     def __str__(self) -> str:

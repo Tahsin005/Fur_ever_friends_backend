@@ -53,7 +53,7 @@ class PetAdoptSerializer(serializers.Serializer):
         except Pet.DoesNotExist:
             raise serializers.ValidationError("Invalid pet ID.")
 
-        if pet.adopted_by:
+        if pet.adopter:
             raise serializers.ValidationError("This pet has already been adopted.")
 
         try:
@@ -78,17 +78,12 @@ class PetAdoptSerializer(serializers.Serializer):
         adopting_cost = self.validated_data["adopting_cost"]
 
         with transaction.atomic():
-            pet.adopted_by_id = user_account.user_id
+            pet.adopter_id = user_account.user_id
             pet.save()
 
             user_account.balance -= adopting_cost
             user_account.save(update_fields=["balance"])
 
-            Transaction.objects.create(
-                account=user_account,
-                amount=adopting_cost,
-                balance_after_transaction=user_account.balance,
-                transaction_type="Pay",
-            )
+            Transaction.objects.create(account=user_account, amount=adopting_cost, balance_after_transaction=user_account.balance, transaction_type="Pay",)
 
         return pet
