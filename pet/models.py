@@ -22,8 +22,8 @@ class Pet(models.Model):
         return f'Pet name : {self.name}'
     
 class Review(models.Model):
-    pet = models.ForeignKey(Pet, related_name="reviews", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pet = models.ForeignKey(Pet, related_name="reviews", on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     
