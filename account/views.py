@@ -87,10 +87,10 @@ class UserLoginApiView(APIView):
 class UserLogoutApiView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        if request.user.auth_token:
+        if hasattr(request.user, "auth_token") and request.user.auth_token:
             request.user.auth_token.delete()
         logout(request)
-        return redirect('login')
+        return redirect(login)
     
 class UserProfileUpdateApiView(UpdateAPIView):
     queryset = User.objects.all()
