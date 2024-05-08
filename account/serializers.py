@@ -10,11 +10,11 @@ class UserAccountSerializer(serializers.ModelSerializer):
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(required=True)
-    
+    image = serializers.ImageField(required=True)
     
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password', 'confirm_password']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password', 'confirm_password', 'image']
     
     def save(self):
         username = self.validated_data['username']
@@ -23,6 +23,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         last_name = self.validated_data['last_name']
         password = self.validated_data['password']
         password2 = self.validated_data['confirm_password']
+        image = self.validated_data.pop('image')
         if password != password2:
             raise serializers.ValidationError({'error' : "Password doesn't match"})
         
@@ -34,7 +35,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.is_active = False
         user.save()
-        UserAccount.objects.create(user=user, balance=0, account_no=int(user.id) + 1000)
+        UserAccount.objects.create(user=user, image=image, balance=0, account_no=int(user.id) + 1000)
         return user
     
 class UserLoginSerializer(serializers.Serializer):
@@ -46,10 +47,11 @@ class UserLoginSerializer(serializers.Serializer):
     
     
 class UserProfileUpdateSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False)
     
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'image']
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -58,6 +60,8 @@ class UserProfileUpdateSerializer(serializers.ModelSerializer):
                 user_account = self.instance.account
             except UserAccount.DoesNotExist:
                 user_account = None
+            if user_account:
+                self.fields["image"].initial = user_account.image
 
     def save(self, **kwargs):
         commit = kwargs.pop("commit", True)
@@ -67,6 +71,7 @@ class UserProfileUpdateSerializer(serializers.ModelSerializer):
             data.save()
 
             user_account, created = UserAccount.objects.get_or_create(user=data)
+            user_account.image = self.validated_data.get("image", None)
             user_account.save()
 
         return data
