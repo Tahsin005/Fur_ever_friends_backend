@@ -28,4 +28,4 @@ class Review(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     
     def __str__(self) -> str:
-        return f'Reviewer : {self.user.first_name} {self.user.last_name}'
+        return f'Review {self.pet}'
