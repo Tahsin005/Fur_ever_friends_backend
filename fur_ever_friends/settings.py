@@ -93,23 +93,23 @@ WSGI_APPLICATION = 'fur_ever_friends.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         # Replace this value with your local database's connection string.
-#         default='postgres://fur_ever_friends_user:qSJsZbgUbHqMmvZLcV6imXaxr5p53aJX@dpg-cospk0ud3nmc73dlf9pg-a.oregon-postgres.render.com/fur_ever_friends',
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
 # }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgres://fur_ever_friends_ipdk_user:TWQaC5lT3Xe7lRSpecihV2mHetZoNuM7@dpg-coth32v109ks73aknd2g-a.oregon-postgres.render.com/fur_ever_friends_ipdk',
+    )
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
