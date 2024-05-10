@@ -31,7 +31,22 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = ['https://fur-ever-friends-backend.onrender.com','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    'https://fur-ever-friends-backend.onrender.com',
+    'https://*.127.0.0.1',
+    'http://127.0.0.1:5500',
+]
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "x-requested-with",
+    "authorization",
+    "x-csrftoken",
+    "accept",
+    "accept-encoding",
+    "dnt",
+    "origin",
+    "user-agent",
+]
 # Application definition
 
 INSTALLED_APPS = [
