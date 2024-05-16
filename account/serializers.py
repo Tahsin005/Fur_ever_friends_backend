@@ -47,7 +47,8 @@ class UserLoginSerializer(serializers.Serializer):
     
     
 class UserProfileUpdateSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(required=False)
+    # image = serializers.ImageField(required=False)
+    image = serializers.URLField(required=False)
     
     class Meta:
         model = User

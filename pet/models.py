@@ -10,7 +10,8 @@ class Category(models.Model):
     
 class Pet(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="pet/images/")
+    # image = models.ImageField(upload_to="pet/images/")
+    image = models.URLField()
     description = models.TextField()
     price = models.IntegerField()
     categories = models.ManyToManyField(Category, related_name='categories')
