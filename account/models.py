@@ -7,7 +7,7 @@ class UserAccount(models.Model):
     account_no = models.IntegerField(unique=True)
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     # image = models.ImageField(upload_to="account/images/")
-    image = models.URLField()
+    # image = models.URLField()
     
     def __str__(self) -> str:
         return f'{self.user.username} : {self.account_no}'

@@ -2,7 +2,7 @@ from django.contrib import admin
 from . models import UserAccount
 # Register your models here.
 class UserAccountAdmin(admin.ModelAdmin):
-    list_display = ["account_no", "first_name", "last_name", "balance", "image"]
+    list_display = ["account_no", "first_name", "last_name", "balance"]
     def first_name(self, obj):
         return obj.user.first_name
 
