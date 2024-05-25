@@ -10,7 +10,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(required=True)
-    image = serializers.ImageField(required=True)
+    # image = serializers.ImageField(required=True)
     
     class Meta:
         model = User
